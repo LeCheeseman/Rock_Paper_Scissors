@@ -1,5 +1,5 @@
-const min = 1
-const max = 9
+const MIN = 1
+const MAX = 9
 
 let humanScore = 0
 let compScore = 0
@@ -9,14 +9,16 @@ function getComputerChoice() {
 // We use a random number between 1-9 because there are three results
 // so we can distribute them evenly 1-3, 4-6, 7-9.
 
-    let compRandomNumber = Math.floor(Math.random() * (max - min)) + 1;
+    let compRandomNumber = Math.floor(Math.random() * (MAX - MIN)) + 1;
    
     if (compRandomNumber <= 3) { 
         return "rock";
         console.log("rock");
+
     } else if (compRandomNumber > 3 && compRandomNumber <= 6) { 
         return "paper";
         console.log("paper");
+
     } else { 
         return "scissors";
         console.log("scissors");   
@@ -27,7 +29,6 @@ function getComputerChoice() {
 function getHumanChoice() {
     let humanChoice = prompt("Rock, Paper, or Scissors?").toLowerCase();
     return humanChoice;
-    console.log(humanChoice);
 }
 
 function playRound() {
@@ -111,7 +112,7 @@ function playGame() {
  }
 
  function resetScore() {
-    // We're resetting global variables, so don't need 'let' 
+    // Resetting global variables, so don't use 'let' 
     humanScore = 0;
     compScore = 0;
  }
