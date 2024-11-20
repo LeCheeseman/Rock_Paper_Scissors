@@ -1,3 +1,5 @@
+// import { resultsObject } from 'resultsObject.js';
+
 const MIN = 1
 const MAX = 9
 
@@ -6,22 +8,23 @@ let compScore = 0
 
 function getComputerChoice() {
     
-// We use a random number between 1-9 because there are three results
-// so we can distribute them evenly 1-3, 4-6, 7-9.
-
     let compRandomNumber = Math.floor(Math.random() * (MAX - MIN)) + 1;
+
+    // We use a random number between 1-9 because there are three results
+    // so we can distribute them evenly 1-3, 4-6, 7-9.
+
    
     if (compRandomNumber <= 3) { 
         return "rock";
-        console.log("rock");
+    //    console.log("rock");
 
     } else if (compRandomNumber > 3 && compRandomNumber <= 6) { 
         return "paper";
-        console.log("paper");
+    //    console.log("paper");
 
     } else { 
         return "scissors";
-        console.log("scissors");   
+    //    console.log("scissors");   
     }
 
 }
@@ -31,67 +34,72 @@ function getComputerChoice() {
 //     return humanChoice;
 // }
 
-function playRound(choice) {
-    console.log(choice + "into playRound()");
-    // Need to alter this to accept argument. 
+function writeResult() { 
 
-    // let humanChoice = getHumanChoice();
+    const div = document.querySelector("#results");
+    const playerElement = document.createElement("h3");
+    
+    playerElement.textContent = resultsObject[key].player;
+
+    div.appendChild(playerElement);
+
+    const computerElement = document.createElement("h3");
+
+    computerElement.textContent = resultsObject[key].computer;
+
+    div.appendChild(computerElement);
+    
+    const outcomeElement = document.createElement("h3");
+    outcomeElement.textContent = resultsObject[key].outcome;
+
+    div.appendChild(outcomeElement);
+
+}
+
+
+function playRound(choice) {
+
     let compChoice = getComputerChoice();
 
+    key = choice + compChoice;
+
+    // key var for accessing correct part of resultObject in writeResult() function.
+
     if (choice == "rock" && compChoice == "paper") {
-        console.log("You: Rock...");
-        console.log("Computer: Paper!");
-        console.log("You lose! Paper beats rock.");
-        ++compScore
+    writeResult();
+    ++compScore
     }
-        else if (choice == "rock" && compChoice == "scissors") {
-            console.log("You: Rock...");
-            console.log("Computer: Scissors!");
-            console.log("You win! Rock beats scissors.");
-            ++humanScore
+    if (choice == "rock" && compChoice == "scissors") {
+        writeResult();
+        ++humanScore
         }
-         else if (choice == "rock" && compChoice == "rock") {
-            console.log("You: Rock...");
-            console.log("Computer: Rock!");
-            console.log("It's a draw! Rock and rock.");
-         }
+    if (choice == "rock" && compChoice == "rock") {
+        writeResult();
+        }
     if (choice == "paper" && compChoice == "rock") {
-            console.log("You: Paper...");
-            console.log("Computer: Rock!");
-            console.log("You win! Paper beats rock.");
-            ++humanScore
+        writeResult();
+        ++humanScore
         }
-        else if (choice == "paper" && compChoice == "scissors") {
-                console.log("You: Paper...");
-                console.log("Computer: Scissors!");
-                console.log("You lose! Scissors beats paper.");
-                ++compScore
-            }
-        else if (choice == "paper" && compChoice == "paper") {
-            console.log("You: Paper...");
-            console.log("Computer: Paper!");
-            console.log("It's a draw! Paper and paper.");
-            }
+    if (choice == "paper" && compChoice == "scissors") {
+        writeResult();
+        ++compScore
+        }
+    if (choice == "paper" && compChoice == "paper") {
+        writeResult();
+        }
     if (choice == "scissors" && compChoice == "rock") {
-            console.log("You: Scissors...");
-            console.log("Computer: Rock!");
-            console.log("You lose! Rock beats scissors.");
-            ++compScore
-
-            }
-        else if (choice == "scissors" && compChoice == "paper") {
-            console.log("You: Scissors...");
-            console.log("Computer: Paper!");
-            console.log("You win! Scissors beats paper.");
-            ++humanScore
-
-                }
-        else if (choice == "scissors" && compChoice == "scissors") {
-            console.log("You: Scissors...");
-            console.log("Computer: Scissors!");
-            console.log("It's a draw! Scissors and scissors.");
-            }
+        writeResult();
+        ++compScore
+        }
+    if (choice == "scissors" && compChoice == "paper") {
+        writeResult();
+        ++humanScore
+        }
+    if (choice == "scissors" && compChoice == "scissors") {
+        writeResult();
+        }
     }
+
 
 // function playGame() {
 //     for (let i = 1; i < 6; i++) {
@@ -119,6 +127,8 @@ function playRound(choice) {
     compScore = 0;
  }
 
+ // EVENT LISTENERS
+
 const rockButtonPressed = document.querySelector("#rock");
 
 rockButtonPressed.addEventListener("click", (event) => {
@@ -142,3 +152,54 @@ paperButtonPressed.addEventListener("click", (event) => {
     console.log("EV Listener: Paper pressed");
     event.stopPropagation;
 });
+
+// RESULTS_OBJECT
+
+resultsObject = {
+    "rockscissors": {
+        player: "You play... Rock.",
+        computer: "Computer plays... Scissors.",
+        outcome: "Rock beats Scissors, you WIN!"
+    },
+    "rockpaper": {
+        player: "You play... Rock.",
+        computer: "Computer plays... Paper.",
+        outcome: "Paper beats Rock, you LOSE!"
+    },
+    "rockrock": {
+        player: "You play... Rock.",
+        computer: "Computer plays... Rock.",
+        outcome: "Rock and Rock, it's a draw!"
+    },
+    "scissorsrock": {
+        player: "You play... Scissors.",
+        computer: "Computer plays... Rock.",
+        outcome: "Rock beats Scissors, you Lose!"
+    },
+    "scissorspaper": {
+        player: "You play... Scissors.",
+        computer: "Computer plays... Paper.",
+        outcome: "Scissors beats Paper, you WIN!"
+    },
+    "scissorsscissors": {
+        player: "You play... Scissors.",
+        computer: "Computer plays... Scissors.",
+        outcome: "Scissors and Scissors, it's a draw!"
+    },
+    "paperrock": {
+        player: "You play... Paper.",
+        computer: "Computer plays... Rock.",
+        outcome: "Paper beats Rock, you WIN!"
+    },
+    "paperscissors": {
+        player: "You play... Paper.",
+        computer: "Computer plays... Scissors.",
+        outcome: "Scissors beats Paper, you WIN!"
+    },
+    "paperpaper": {
+        player: "You play... Paper.",
+        computer: "Computer plays... Paper.",
+        outcome: "Paper and Paper, it's a draw!"
+    },
+
+}
