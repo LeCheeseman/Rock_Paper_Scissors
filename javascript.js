@@ -13,13 +13,12 @@ function getComputerChoice() {
    
     if (compRandomNumber <= 3) { 
         return "rock";
-
     } if (compRandomNumber > 3 && compRandomNumber <= 6) { 
         return "paper";
-    } else { 
-        return "scissors";
+    } 
+    return "scissors";
     }
-}
+
 
 function playRound(choice) {
 
@@ -28,7 +27,7 @@ function playRound(choice) {
 
     key = choice + compChoice;
 
-    // key var for accessing correct part of resultObject in writeResult() function.
+    // key is to access correct part of resultObject.
 
     if (choice == "rock" && compChoice == "paper") {
         writeResult();
@@ -82,7 +81,6 @@ function playRound(choice) {
         outcomeElement = document.createElement("h3");
         outcomeElement.textContent = resultsObject[key].outcome;
         div.appendChild(outcomeElement);
-    
     }
 
     function checkGameStatus() { 
