@@ -1,64 +1,29 @@
-// import { resultsObject } from 'resultsObject.js';
-
-const MIN = 1
-const MAX = 9
-
-let humanScore = 0
-let compScore = 0
+const MIN = 1;
+const MAX = 9;
+let humanScore = 0;
+let compScore = 0;
+let gamesPlayed = 0;
 
 function getComputerChoice() {
     
     let compRandomNumber = Math.floor(Math.random() * (MAX - MIN)) + 1;
 
-    // We use a random number between 1-9 because there are three results
+    // We use a number between 1-9 because there are three results
     // so we can distribute them evenly 1-3, 4-6, 7-9.
-
    
     if (compRandomNumber <= 3) { 
         return "rock";
-    //    console.log("rock");
 
-    } else if (compRandomNumber > 3 && compRandomNumber <= 6) { 
+    } if (compRandomNumber > 3 && compRandomNumber <= 6) { 
         return "paper";
-    //    console.log("paper");
-
     } else { 
         return "scissors";
-    //    console.log("scissors");   
     }
-
 }
-
-// function getHumanChoice() {
-//     let humanChoice = prompt("Rock, Paper, or Scissors?").toLowerCase();
-//     return humanChoice;
-// }
-
-function writeResult() { 
-
-    const div = document.querySelector("#results");
-    const playerElement = document.createElement("h3");
-    
-    playerElement.textContent = resultsObject[key].player;
-
-    div.appendChild(playerElement);
-
-    const computerElement = document.createElement("h3");
-
-    computerElement.textContent = resultsObject[key].computer;
-
-    div.appendChild(computerElement);
-    
-    const outcomeElement = document.createElement("h3");
-    outcomeElement.textContent = resultsObject[key].outcome;
-
-    div.appendChild(outcomeElement);
-
-}
-
 
 function playRound(choice) {
 
+    checkGameStatus();
     let compChoice = getComputerChoice();
 
     key = choice + compChoice;
@@ -66,40 +31,70 @@ function playRound(choice) {
     // key var for accessing correct part of resultObject in writeResult() function.
 
     if (choice == "rock" && compChoice == "paper") {
-    writeResult();
-    ++compScore
+        writeResult();
+        ++compScore, ++gamesPlayed;
     }
     if (choice == "rock" && compChoice == "scissors") {
         writeResult();
-        ++humanScore
+        ++humanScore, ++gamesPlayed;
         }
     if (choice == "rock" && compChoice == "rock") {
         writeResult();
+        ++gamesPlayed;
         }
     if (choice == "paper" && compChoice == "rock") {
         writeResult();
-        ++humanScore
+        ++humanScore, ++gamesPlayed;
         }
     if (choice == "paper" && compChoice == "scissors") {
         writeResult();
-        ++compScore
+        ++compScore, ++gamesPlayed;
         }
     if (choice == "paper" && compChoice == "paper") {
         writeResult();
+        ++gamesPlayed;
         }
     if (choice == "scissors" && compChoice == "rock") {
         writeResult();
-        ++compScore
+        ++compScore, ++gamesPlayed;
         }
     if (choice == "scissors" && compChoice == "paper") {
         writeResult();
-        ++humanScore
+        ++humanScore, ++gamesPlayed;
         }
     if (choice == "scissors" && compChoice == "scissors") {
         writeResult();
+        ++gamesPlayed;
         }
     }
 
+    function writeResult() { 
+
+        div = document.querySelector("#results");
+        playerElement = document.createElement("h3");
+        playerElement.textContent = resultsObject[key].player;
+        div.appendChild(playerElement);
+    
+        computerElement = document.createElement("h3");
+        computerElement.textContent = resultsObject[key].computer;
+        div.appendChild(computerElement);
+        
+        outcomeElement = document.createElement("h3");
+        outcomeElement.textContent = resultsObject[key].outcome;
+        div.appendChild(outcomeElement);
+    
+    }
+
+    function checkGameStatus() { 
+
+        if (gamesPlayed >= 1) {
+            playerElement.remove();
+            computerElement.remove();
+            outcomeElement.remove();
+            gamesPlayed = 0;
+            // Delete created elements. 
+        }
+    }
 
 // function playGame() {
 //     for (let i = 1; i < 6; i++) {
