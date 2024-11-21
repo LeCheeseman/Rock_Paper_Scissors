@@ -29,39 +29,39 @@ function playRound(choice) {
 
     // key is to access correct part of resultObject.
 
-    if (choice == "rock" && compChoice == "paper") {
-        writeResult();
+    if (key == "rockpaper") {
         ++compScore, ++gamesPlayed;
+        writeResult();
     }
-    if (choice == "rock" && compChoice == "scissors") {
-        writeResult();
+    if (key == "rockscissors") {
         ++humanScore, ++gamesPlayed;
-        }
-    if (choice == "rock" && compChoice == "rock") {
         writeResult();
+        }
+    if (key == "rockrock") {
         ++gamesPlayed;
-        }
-    if (choice == "paper" && compChoice == "rock") {
         writeResult();
+        }
+    if (key == "paperrock") {
         ++humanScore, ++gamesPlayed;
-        }
-    if (choice == "paper" && compChoice == "scissors") {
         writeResult();
+        }
+    if (key == "paperscissors") {
         ++compScore, ++gamesPlayed;
-        }
-    if (choice == "paper" && compChoice == "paper") {
         writeResult();
+        }
+    if (key == "paperpaper") {
         ++gamesPlayed;
-        }
-    if (choice == "scissors" && compChoice == "rock") {
         writeResult();
+        }
+    if (key == "scissorsrock") {
         ++compScore, ++gamesPlayed;
-        }
-    if (choice == "scissors" && compChoice == "paper") {
         writeResult();
-        ++humanScore, ++gamesPlayed;
         }
-    if (choice == "scissors" && compChoice == "scissors") {
+    if (key == "scissorspaper") {
+        ++humanScore, ++gamesPlayed;
+        writeResult();
+        }
+    if (key == "scissorsscissors") {
         writeResult();
         ++gamesPlayed;
         }
@@ -90,7 +90,6 @@ function playRound(choice) {
             computerElement.remove();
             outcomeElement.remove();
             gamesPlayed = 0;
-            // Delete created elements. 
         }
     }
 
